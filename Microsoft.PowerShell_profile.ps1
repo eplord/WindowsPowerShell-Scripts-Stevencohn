@@ -23,6 +23,12 @@ function prompt {
 	return "> "
 }
 
+function New-Console
+{
+	# start a new PS7 console window, rather than a Windows Terminal
+	Start-Process conhost.exe -ArgumentList "`"$env:ProgramFiles\PowerShell\7\pwsh.exe`""
+}
+
 function Push-PSRoot
 {
 	[CmdletBinding()]
