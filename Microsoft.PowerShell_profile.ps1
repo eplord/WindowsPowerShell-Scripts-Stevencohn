@@ -130,8 +130,7 @@ if (Test-Path $pwd\PowerShell_profile.ps1)
 	. $pwd\PowerShell_profile.ps1
 }
 
-oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\paradoxical.omp.json" | Invoke-Expression 
-$env:AWS_PROFILE='wcc-dev'
+oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\paradoxical.omp.json" | Invoke-Expression
 
 # enable predictive intellisense listview
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin
