@@ -14,23 +14,23 @@ Begin
 {
     function DisableScreensaver
     {
-        # --- Disable Screensaver ---
+        # disable screensaver
         Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name ScreenSaveActive -Value "0"
         Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name SCRNSAVE.EXE -Value ""
         Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name ScreenSaverIsSecure -Value "0"
 
-        # --- Disable Lock Screen Timeout (Console) ---
+        # disable lock screen timeout (Console)
         Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name ScreenSaveTimeOut -Value "0"
 
-        # --- Disable Winlogon Inactivity Timeout ---
+        # disable Winlogon inactivity timeout
         New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies" -Name System -Force | Out-Null
         Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name InactivityTimeoutSecs -Value 0
 
-        # --- Disable RDP Idle Timeout ---
+        # disable RDP idle timeout
         New-Item -Path "HKCU:\Software\Policies\Microsoft\Windows NT" -Name 'Terminal Services' -Force | Out-Null
         Set-ItemProperty -Path "HKCU:\Software\Policies\Microsoft\Windows NT\Terminal Services" -Name MaxIdleTime -Value 0
 
-        # --- Disable Console Auto-Lock ---
+        # disable console auto-lock
         Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name LockScreenAutoLock -Value "0"
 
         Write-Host "Screensaver and all locking behavior disabled." -fo Magenta
@@ -38,19 +38,19 @@ Begin
 
     function EnableScreensaver
     {
-        # --- Restore Screensaver Defaults ---
+        # restore screensaver defaults
         Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name ScreenSaveActive -Value "1"
         Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name SCRNSAVE.EXE -Value "C:\WINDOWS\system32\scrnsave.scr"
         Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name ScreenSaverIsSecure -Value "1"
         Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name ScreenSaveTimeOut -Value "900"   # 15 minutes
 
-        # --- Restore Winlogon Inactivity Timeout ---
+        # restore Winlogon inactivity timeout
         Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name InactivityTimeoutSecs -ErrorAction SilentlyContinue
 
-        # --- Restore RDP Idle Timeout ---
+        # restore RDP idle timeout
         Remove-ItemProperty -Path "HKCU:\Software\Policies\Microsoft\Windows NT\Terminal Services" -Name MaxIdleTime -ErrorAction SilentlyContinue
 
-        # --- Restore Auto-Lock ---
+        # restore auto-lock
         Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name LockScreenAutoLock -Value "1"
 
         Write-Host "Screensaver and lock behavior restored to defaults." -fo Green
