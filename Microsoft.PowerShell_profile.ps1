@@ -65,10 +65,12 @@ if (Test-Path $0)
 }
 
 function Lock-RDP {
-    & "C:\Tools\RDP\RDP-lock.cmd"
+	# enable default screensaver and locking behavior
+    Set-RDP-Screensaver
 }
 function Unlock-RDP {
-    & "C:\Tools\RDP\RDP-unlock.cmd"
+	# disable default screensaver and locking behavior for RDP sessions
+	Set-RDP-Screensaver -Disable
 }
 
 # Command aliases...
