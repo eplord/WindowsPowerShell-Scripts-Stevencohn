@@ -46,8 +46,9 @@ function Stop-Edge
 {
 	[CmdletBinding()]
 	[Alias('stopedge')]
-	param()
+	param([switch]$WebView)
 	taskkill /f /im msedge.exe
+	if ($WebView) { taskkill /f /im msedgewebview2.exe }
 }
 
 function Start-Wilma
